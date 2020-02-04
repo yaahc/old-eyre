@@ -97,38 +97,6 @@ impl fmt::Display for ContextObject {
     }
 }
 
-// impl ErrorFormatter for crate::context::RootCauseFirst {
-//     fn fmt_error<'a>(
-//         &self,
-//         error: &'a (dyn std::error::Error + 'static),
-//         f: &mut fmt::Formatter,
-//     ) -> fmt::Result {
-//         let errors = Chain::new(error).rev().enumerate();
-
-//         writeln!(f)?;
-
-//         for (n, error) in errors {
-//             write!(Indented::numbered(f, n), "{}", error)?;
-//             writeln!(f)?;
-//         }
-
-//         write!(f, "\n\n{}", self.span_backtrace)?;
-
-//         let backtrace = &self.backtrace;
-//         if let BacktraceStatus::Captured = backtrace.status() {
-//             let mut backtrace = backtrace.to_string();
-//             if backtrace.starts_with("stack backtrace:") {
-//                 // Capitalize to match "Caused by:"
-//                 backtrace.replace_range(0..7, "Stack B");
-//             }
-//             backtrace.truncate(backtrace.trim_end().len());
-//             write!(f, "\n\n{}", backtrace)?;
-//         }
-
-//         Ok(())
-//     }
-// }
-
 pub(crate) mod private {
     use super::*;
 
@@ -138,5 +106,4 @@ pub(crate) mod private {
         E: workingtitle::IntoErrorReporter<BoxError, RootCauseFirst, ContextObject>
     {
     }
-    impl<T> Sealed for Option<T> {}
 }
