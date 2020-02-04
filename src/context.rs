@@ -88,6 +88,15 @@ pub enum ContextObject {
     Warn(Box<dyn ContextObj>),
 }
 
+impl fmt::Display for ContextObject {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        match self {
+            Self::Note(context) => write!(f, "Note: {}", context),
+            Self::Warn(context) => write!(f, "Warn: {}", context),
+        }
+    }
+}
+
 // impl ErrorFormatter for crate::context::RootCauseFirst {
 //     fn fmt_error<'a>(
 //         &self,

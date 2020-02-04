@@ -19,6 +19,14 @@ impl fmt::Debug for ErrReport {
             writeln!(f)?;
         }
 
+        if !self.0.context.context.is_empty() {
+            write!(f, "\nInfo:")?;
+            for (n, context) in self.0.context.context.iter().enumerate() {
+                writeln!(f)?;
+                write!(Indented::numbered(f, n), "{}", context)?;
+            }
+        }
+
         write!(f, "\n\n{}", self.0.context.span_backtrace)?;
 
         let backtrace = &self.0.context.backtrace;

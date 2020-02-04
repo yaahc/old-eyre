@@ -1,5 +1,5 @@
 [package]
-name = "humanerr"
+name = "jane-err"
 version = "0.1.0"
 authors = ["Jane Lusby <jlusby@yaah.dev>"]
 edition = "2018"
@@ -9,4 +9,4 @@ edition = "2018"
 [dependencies]
 adhocerr = "0.1.2"
 workingtitle = { path = "/home/jlusby/git/rust/workingtitle" }
-tracing-error = { git = "https://github.com/tokio-rs/tracing.git", branch = "eliza/depath" }
+tracing-error = { path = "/home/jlusby/git/rust/tracing/tracing-error" }
