@@ -1,6 +1,6 @@
 use crate::{BoxError, ErrReport};
+use eyre_impl::Indented;
 use std::{backtrace::BacktraceStatus, fmt, fmt::Write as _};
-use workingtitle::Indented;
 
 impl fmt::Debug for ErrReport {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
@@ -57,7 +57,7 @@ where
     E: std::error::Error + Send + Sync + 'static,
 {
     fn from(err: E) -> Self {
-        ErrReport(Box::new(workingtitle::ErrorReporter::from(BoxError(
+        ErrReport(Box::new(eyre_impl::ErrorReporter::from(BoxError(
             Box::new(err),
         ))))
     }

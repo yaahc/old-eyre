@@ -1,6 +1,6 @@
 use crate::{BoxError, ErrReport, Result, RootCauseFirst};
+use eyre_impl::{ErrorContext, IntoErrorReporter};
 use std::fmt;
-use workingtitle::{ErrorContext, IntoErrorReporter};
 
 impl RootCauseFirst {
     pub fn note(&mut self, context: impl ContextObj) {
@@ -48,7 +48,7 @@ pub trait ContextExt<T, E>: private::Sealed {
 
 impl<T, E> ContextExt<T, E> for std::result::Result<T, E>
 where
-    E: workingtitle::IntoErrorReporter<BoxError, RootCauseFirst, ContextObject>
+    E: eyre_impl::IntoErrorReporter<BoxError, RootCauseFirst, ContextObject>
         + Send
         + Sync
         + 'static,
@@ -77,7 +77,7 @@ impl IntoErrorReporter<BoxError, RootCauseFirst, ContextObject> for crate::ErrRe
     fn ext_context(
         mut self,
         context: ContextObject,
-    ) -> workingtitle::ErrorReporter<BoxError, RootCauseFirst> {
+    ) -> eyre_impl::ErrorReporter<BoxError, RootCauseFirst> {
         self.0.context.push(context);
         *self.0
     }
@@ -103,7 +103,7 @@ pub(crate) mod private {
     pub trait Sealed {}
 
     impl<T, E> Sealed for std::result::Result<T, E> where
-        E: workingtitle::IntoErrorReporter<BoxError, RootCauseFirst, ContextObject>
+        E: eyre_impl::IntoErrorReporter<BoxError, RootCauseFirst, ContextObject>
     {
     }
 }

@@ -1,12 +1,22 @@
 [package]
-name = "jane-err"
+name = "eyre"
 version = "0.1.0"
 authors = ["Jane Lusby <jlusby@yaah.dev>"]
 edition = "2018"
+license = "MIT OR Apache-2.0"
+readme = "README.md"
+repository = "https://github.com/yaahc/eyre"
+homepage = "https://github.com/yaahc/eyre"
+documentation = "https://docs.rs/eyre"
+keywords = ["error"]
+description = """
+A catch all dyn error type that integrates with tracing-error and allows
+insertion of custom context as notes or warnings
+"""
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-adhocerr = "0.1.2"
-workingtitle = { path = "/home/jlusby/git/rust/workingtitle" }
+adhocerr = "0.1"
+eyre-impl = "0.1"
 tracing-error = { path = "/home/jlusby/git/rust/tracing/tracing-error" }

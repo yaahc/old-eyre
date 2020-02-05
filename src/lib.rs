@@ -11,7 +11,7 @@ mod report;
 #[derive(Debug)]
 pub struct BoxError(Box<dyn std::error::Error + Send + Sync + 'static>);
 
-pub struct ErrReport(pub(crate) Box<workingtitle::ErrorReporter<BoxError, RootCauseFirst>>);
+pub struct ErrReport(pub(crate) Box<eyre_impl::ErrorReporter<BoxError, RootCauseFirst>>);
 
 pub struct RootCauseFirst {
     pub(crate) context: Vec<ContextObject>,
@@ -32,7 +32,7 @@ impl fmt::Display for BoxError {
 }
 
 impl ErrReport {
-    fn new(reporter: workingtitle::ErrorReporter<BoxError, RootCauseFirst>) -> Self {
+    fn new(reporter: eyre_impl::ErrorReporter<BoxError, RootCauseFirst>) -> Self {
         ErrReport(Box::new(reporter))
     }
 }
