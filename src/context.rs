@@ -23,7 +23,7 @@ impl Default for RootCauseFirst {
         Self {
             context: Vec::new(),
             backtrace: std::backtrace::Backtrace::capture(),
-            // span_backtrace: tracing_error::SpanTrace::capture(),
+            span_backtrace: tracing_error::SpanTrace::capture(),
         }
     }
 }

@@ -16,7 +16,7 @@ pub struct ErrReport(pub(crate) Box<eyre_impl::ErrorReporter<BoxError, RootCause
 pub struct RootCauseFirst {
     pub(crate) context: Vec<ContextObject>,
     backtrace: Backtrace,
-    // pub(crate) span_backtrace: tracing_error::SpanTrace,
+    pub(crate) span_backtrace: tracing_error::SpanTrace,
 }
 
 impl std::error::Error for BoxError {
