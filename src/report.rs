@@ -27,7 +27,7 @@ impl fmt::Debug for ErrReport {
             }
         }
 
-        write!(f, "\n\n{}", self.0.context.span_backtrace)?;
+        // write!(f, "\n\n{}", self.0.context.span_backtrace)?;
 
         let backtrace = &self.0.context.backtrace;
         if let BacktraceStatus::Captured = backtrace.status() {
