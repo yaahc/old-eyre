@@ -1,6 +1,6 @@
 #![feature(backtrace)]
-pub use context::ContextExt;
-use context::ContextObject;
+pub use context::Context;
+use context::EyreInfo;
 pub use err as format_err;
 use std::{backtrace::Backtrace, fmt};
 
@@ -11,10 +11,10 @@ mod report;
 #[derive(Debug)]
 pub struct BoxError(Box<dyn std::error::Error + Send + Sync + 'static>);
 
-pub struct ErrReport(pub(crate) Box<eyre_impl::ErrorReporter<BoxError, RootCauseFirst>>);
+pub struct ErrReport(pub(crate) Box<eyre_impl::ErrorReporter<BoxError, EyreContext>>);
 
-pub struct RootCauseFirst {
-    pub(crate) context: Vec<ContextObject>,
+pub struct EyreContext {
+    pub(crate) context: Vec<EyreInfo>,
     backtrace: Backtrace,
     pub(crate) span_backtrace: tracing_error::SpanTrace,
 }
@@ -32,10 +32,11 @@ impl fmt::Display for BoxError {
 }
 
 impl ErrReport {
-    fn new(reporter: eyre_impl::ErrorReporter<BoxError, RootCauseFirst>) -> Self {
+    fn new(reporter: eyre_impl::ErrorReporter<BoxError, EyreContext>) -> Self {
         ErrReport(Box::new(reporter))
     }
 }
+
 pub type Result<T> = std::result::Result<T, ErrReport>;
 
 #[doc(hidden)]

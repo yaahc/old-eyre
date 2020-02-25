@@ -54,11 +54,11 @@ impl fmt::Display for ErrReport {
 
 impl<E> From<E> for ErrReport
 where
-    E: std::error::Error + Send + Sync + 'static,
+    E: Into<Box<dyn std::error::Error + Send + Sync + 'static>>,
 {
     fn from(err: E) -> Self {
         ErrReport(Box::new(eyre_impl::ErrorReporter::from(BoxError(
-            Box::new(err),
+            err.into(),
         ))))
     }
 }

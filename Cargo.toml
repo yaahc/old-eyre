@@ -18,5 +18,5 @@ insertion of custom context as notes or warnings
 
 [dependencies]
 adhocerr = "0.1"
-eyre-impl = "0.1"
+eyre-impl = { path = "/home/jlusby/git/rust/eyre-impl" }
 tracing-error = { path = "/home/jlusby/git/rust/tracing/tracing-error" }
