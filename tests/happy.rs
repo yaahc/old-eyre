@@ -13,6 +13,10 @@ fn can_catch_cows() -> eyre::Result<()> {
 
 #[test]
 fn can_catch_all_the_things() {
-    can_catch_strings().map_err(|e| println!("{:?}", e)).unwrap_err();
-    can_catch_cows().map_err(|e| println!("{:?}", e)).unwrap_err();
+    can_catch_strings()
+        .map_err(|e| println!("{:?}", e))
+        .unwrap_err();
+    can_catch_cows()
+        .map_err(|e| println!("{:?}", e))
+        .unwrap_err();
 }
